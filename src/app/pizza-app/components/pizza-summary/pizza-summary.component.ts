@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
-import { CurrencyPipe, NgForOf, TitleCasePipe } from '@angular/common';
+import { CurrencyPipe, NgForOf, NgIf, TitleCasePipe } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -11,7 +11,7 @@ import { CurrencyPipe, NgForOf, TitleCasePipe } from '@angular/common';
   template: `
     <div class="pizza-summary">
       <h2>Order Summary</h2>
-      <div class="pizza-summary__pizza" *ngFor="let pizza of parent.get('pizzas').value">
+      <div class="pizza-summary__pizza" *ngFor="let pizza of parent?.get('pizzas')?.value">
         <div *ngIf="pizza.size">
           <h3>
             {{ pizza.size | titlecase }} Pizza
@@ -38,7 +38,7 @@ import { CurrencyPipe, NgForOf, TitleCasePipe } from '@angular/common';
       </button>
     </div>
   `,
-  imports: [TitleCasePipe, CurrencyPipe, NgForOf],
+  imports: [TitleCasePipe, CurrencyPipe, NgForOf, NgIf],
 })
 export class PizzaSummaryComponent {
   @Input()

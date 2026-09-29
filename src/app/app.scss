@@ -13,7 +13,7 @@
   overflow: hidden;
 }
 
-:host /deep/ h2 {
+:host h2 {
   color: #6E7790;
   font-size: 22px;
   position: relative;
@@ -27,7 +27,7 @@
   }
 }
 
-:host /deep/ .section {
+:host .section {
   margin: 10px 0;
   display: flex;
 }

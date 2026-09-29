@@ -2,14 +2,14 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 import { FormArray, ReactiveFormsModule } from '@angular/forms';
 import { PizzaSizeComponent } from '../pizza-size/pizza-size.component';
 import { PizzaToppingsComponent } from '../pizza-toppings/pizza-toppings.component';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'pizza-creator',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['pizza-creator.component.scss'],
-  imports: [PizzaSizeComponent, PizzaToppingsComponent, ReactiveFormsModule, NgForOf],
+  imports: [PizzaSizeComponent, PizzaToppingsComponent, ReactiveFormsModule, NgForOf, NgIf],
   template: `
     <div class="pizza-creator">
       <h2>
@@ -63,7 +63,7 @@ export class PizzaCreatorComponent {
   private visiblePizza: number = 0;
 
   @Input()
-  pizzas: FormArray | undefined;
+  pizzas!: FormArray;
 
   @Output()
   add = new EventEmitter<any>();

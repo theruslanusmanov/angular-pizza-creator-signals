@@ -9,7 +9,7 @@ import { NgIf } from '@angular/common';
   selector: 'pizza-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['pizza-form.component.scss'],
-  imports: [PizzaCreatorComponent, PizzaSummaryComponent, ReactiveFormsModule, NgIf],
+  imports: [PizzaCreatorComponent, PizzaSummaryComponent, ReactiveFormsModule],
   template: `
     <form (ngSubmit)="onSubmit($event)" [formGroup]="parent">
       <h2>Enter your details</h2>
@@ -17,7 +17,7 @@ import { NgIf } from '@angular/common';
         <div class="input">
           <label>
             Name <span class="required">*</span>
-            @if (parent.get('details').get('name').hasError('required') && parent.get('details').get('name').touched) {
+            @if (parent?.get('details')?.get('name')?.hasError('required') && parent?.get('details')?.get('name')?.touched) {
               <span class="error">Field is required</span>
             }
           </label>
@@ -26,7 +26,7 @@ import { NgIf } from '@angular/common';
         <div class="input">
           <label>
             Email <span class="required">*</span>
-            @if (parent.get('details').get('email').errors && parent.get('details').get('email').touched) {
+            @if (parent?.get('details')?.get('email')?.errors && parent?.get('details')?.get('email')?.touched) {
               <span class="error">Field is required</span>
             }
           </label>
@@ -35,14 +35,14 @@ import { NgIf } from '@angular/common';
         <div class="input">
           <label>
             Confirm <span class="required">*</span>
-            @if (parent.get('details').get('confirm').errors && parent.get('details').get('confirm').touched) {
+            @if (parent?.get('details')?.get('confirm')?.errors && parent?.get('details')?.get('confirm')?.touched) {
               <span class="error">
-                @if (parent.get('details').get('confirm').hasError('required')) {
+                @if (parent?.get('details')?.get('confirm')?.hasError('required')) {
                   <span>Field is required</span>
                 }
               </span>
             }
-            @if (!parent.get('details').get('confirm').hasError('required') && parent.get('details').touched && parent.get('details').hasError('nomatch')) {
+            @if (!parent?.get('details')?.get('confirm')?.hasError('required') && parent?.get('details')?.touched && parent?.get('details')?.hasError('nomatch')) {
               <span class="error">Emails must match</span>
             }
           </label>
@@ -53,12 +53,12 @@ import { NgIf } from '@angular/common';
         <div class="input">
           <label>
             Address <span class="required">*</span>
-            @if (parent.get('details').get('address').errors && parent.get('details').get('address').touched) {
+            @if (parent?.get('details')?.get('address')?.errors && parent?.get('details')?.get('address')?.touched) {
               <span class="error">
-                @if (parent.get('details').get('address').hasError('required')) {
+                @if (parent?.get('details')?.get('address')?.hasError('required')) {
                   <span>Field is required</span>
                 }
-                @if (parent.get('details').get('address').hasError('minlength')) {
+                @if (parent?.get('details')?.get('address')?.hasError('minlength')) {
                   <span>Min of 3 characters</span>
                 }
               </span>
@@ -69,13 +69,13 @@ import { NgIf } from '@angular/common';
         <div class="input">
           <label>
             Postcode <span class="required">*</span>
-            @if (parent.get('details').get('postcode').errors && parent.get('details').get('postcode').touched) {
+            @if (parent?.get('details')?.get('postcode')?.errors && parent?.get('details')?.get('postcode')?.touched) {
               <span class="error"></span>
             }
-            @if (parent.get('details').get('postcode').hasError('required')) {
+            @if (parent?.get('details')?.get('postcode')?.hasError('required')) {
               <span> Field is required </span>
             }
-            @if (parent.get('details').get('postcode').hasError('minlength')) {
+            @if (parent?.get('details')?.get('postcode')?.hasError('minlength')) {
               <span> Min of 3 characters </span>
             }
           </label>
@@ -84,7 +84,7 @@ import { NgIf } from '@angular/common';
         <div class="input">
           <label>
             Contact Number <span class="required">*</span>
-            @if (parent.get('details').get('phone').errors && parent.get('details').get('phone').touched) {
+            @if (parent?.get('details')?.get('phone')?.errors && parent?.get('details')?.get('phone')?.touched) {
               <span class="error"> Field is required </span>
             }
           </label>
@@ -106,7 +106,7 @@ import { NgIf } from '@angular/common';
 })
 export class PizzaFormComponent {
   @Input()
-  parent: FormGroup<{ details: FormGroup; pizzas: FormArray }> | undefined;
+  parent!: FormGroup<{ details: FormGroup; pizzas: FormArray }>;
 
   @Input()
   total: string | undefined;
@@ -126,19 +126,19 @@ export class PizzaFormComponent {
   @Output()
   submit = new EventEmitter<any>();
 
-  onAddPizza(event) {
+  onAddPizza(event: any) {
     this.add.emit(event);
   }
 
-  onRemovePizza(event) {
+  onRemovePizza(event: any) {
     this.remove.emit(event);
   }
 
-  onToggle(event) {
+  onToggle(event: any) {
     this.toggle.emit(event);
   }
 
-  onSubmit(event) {
+  onSubmit(event: any) {
     event.stopPropagation();
     this.submit.emit(this.parent);
   }

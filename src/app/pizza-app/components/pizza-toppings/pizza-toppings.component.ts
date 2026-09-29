@@ -59,15 +59,15 @@ export class PizzaToppingsComponent implements ControlValueAccessor {
   private onTouch: Function | undefined;
   private onModelChange: Function | undefined;
 
-  registerOnChange(fn) {
+  registerOnChange(fn: any) {
     this.onModelChange = fn;
   }
 
-  registerOnTouched(fn) {
+  registerOnTouched(fn: any) {
     this.onTouch = fn;
   }
 
-  writeValue(value) {
+  writeValue(value: any) {
     this.value = value;
   }
 

@@ -78,7 +78,7 @@ export class PizzaAppComponent implements OnInit {
     this.activePizza = index;
   }
 
-  calculateTotal(value) {
+  calculateTotal(value: any) {
     const price = value.reduce((prev: number, next: any) => {
       // @ts-ignore
       const price = this.prices[next.size];

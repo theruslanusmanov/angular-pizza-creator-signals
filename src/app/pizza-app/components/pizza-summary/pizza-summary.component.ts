@@ -16,7 +16,7 @@ import { CurrencyPipe, NgForOf, NgIf, TitleCasePipe } from '@angular/common';
           <h3>
             {{ pizza.size | titlecase }} Pizza
             <span class="pizza-summary__price">
-              {{ prices[pizza.size].base | currency: 'USD' : true }}
+              {{ prices[pizza.size].base | currency: 'USD' : '$' }}
             </span>
           </h3>
 
@@ -25,13 +25,13 @@ import { CurrencyPipe, NgForOf, NgIf, TitleCasePipe } from '@angular/common';
               <i class="fa fa-plus"></i>
               {{ topping | titlecase }}
               <span class="pizza-summary__price">
-                {{ prices[pizza.size].toppings | currency: 'USD' : true }}
+                {{ prices[pizza.size].toppings | currency: 'USD' : '$' }}
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div class="pizza-summary__total-price">Total: {{ total | currency: 'USD' : true }}</div>
+      <div class="pizza-summary__total-price">Total: {{ total | currency: 'USD' : '$' }}</div>
 
       <button type="submit" class="pizza-summary__button" [disabled]="parent?.invalid">
         Place order

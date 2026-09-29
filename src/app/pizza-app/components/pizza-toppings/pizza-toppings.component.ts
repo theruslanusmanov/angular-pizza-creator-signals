@@ -13,37 +13,48 @@ const PIZZA_TOPPINGS_ACCESSOR = {
   styleUrls: ['pizza-toppings.component.scss'],
   template: `
     <div class="pizza-toppings">
-      <label 
+      <label
         *ngFor="let topping of toppings"
         class="pizza-topping"
         [class.pizza-topping--active]="value.includes(topping)"
-        [class.pizza-topping--focused]="focused === topping">
-        <input 
+        [class.pizza-topping--focused]="focused === topping"
+      >
+        <input
           type="checkbox"
           [attr.name]="topping"
           [attr.value]="topping"
           (blur)="onBlur(topping)"
           (change)="updateTopping(topping)"
           (focus)="onFocus(topping)"
-          [checked]="value.includes(topping)">
+          [checked]="value.includes(topping)"
+        />
         <span class="pizza-topping__icon pizza-topping__icon--{{ topping }}"></span>
         {{ topping | titlecase }}
       </label>
     </div>
-  `
+  `,
 })
 export class PizzaToppingsComponent implements ControlValueAccessor {
-  
   toppings = [
-    'anchovy', 'bacon', 'basil', 'chili', 'mozzarella', 'mushroom',
-    'olive', 'onion', 'pepper', 'pepperoni', 'sweetcorn', 'tomato'
+    'anchovy',
+    'bacon',
+    'basil',
+    'chili',
+    'mozzarella',
+    'mushroom',
+    'olive',
+    'onion',
+    'pepper',
+    'pepperoni',
+    'sweetcorn',
+    'tomato',
   ];
 
   value: string[] = [];
-  focused: string;
+  focused: string | undefined;
 
-  private onTouch: Function;
-  private onModelChange: Function;
+  private onTouch: Function | undefined;
+  private onModelChange: Function | undefined;
 
   registerOnChange(fn) {
     this.onModelChange = fn;
@@ -63,6 +74,7 @@ export class PizzaToppingsComponent implements ControlValueAccessor {
     } else {
       this.value = this.value.concat([topping]);
     }
+    // @ts-ignore
     this.onModelChange(this.value);
   }
 
@@ -72,6 +84,7 @@ export class PizzaToppingsComponent implements ControlValueAccessor {
 
   onFocus(value: string) {
     this.focused = value;
+    // @ts-ignore
     this.onTouch();
   }
 }

@@ -22,17 +22,15 @@ export const DROP_ANIMATION = trigger('drop', [
       <div class="pizza-viewer__table-side"></div>
       <div class="pizza-viewer__table"></div>
       {{ activePizza }}
-      <div 
+      <div
         class="pizza"
         [class.pizza--active]="activePizza === i"
-        *ngFor="let pizza of pizzas.controls; let i = index;">
+        *ngFor="let pizza of pizzas.controls; let i = index"
+      >
         <div class="pizza__board"></div>
         <div class="pizza__base"></div>
         <div class="pizza__toppings">
-          <div 
-            *ngFor="let topping of pizza.value.toppings; let i = index;"
-            [style.zIndex]="i"
-            @drop>
+          <div *ngFor="let topping of pizza.value.toppings; let i = index" [style.zIndex]="i" @drop>
             <div class="pizza__topping pizza__topping--{{ topping }}"></div>
             <div class="pizza__topping pizza__topping--{{ topping }}"></div>
             <div class="pizza__topping pizza__topping--{{ topping }}"></div>
@@ -42,12 +40,12 @@ export const DROP_ANIMATION = trigger('drop', [
         </div>
       </div>
     </div>
-  `
+  `,
 })
 export class PizzaViewerComponent {
   @Input()
-  pizzas: FormArray;
+  pizzas: FormArray | undefined;
 
   @Input()
-  activePizza: number;
+  activePizza: number | undefined;
 }

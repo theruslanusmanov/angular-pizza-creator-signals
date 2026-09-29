@@ -1,13 +1,15 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import { FormArray, ReactiveFormsModule } from '@angular/forms';
+import { PizzaSizeComponent } from '../pizza-size/pizza-size.component';
+import { PizzaToppingsComponent } from '../pizza-toppings/pizza-toppings.component';
 
 @Component({
   selector: 'pizza-creator',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['pizza-creator.component.scss'],
+  imports: [PizzaSizeComponent, PizzaToppingsComponent, ReactiveFormsModule],
   template: `
     <div class="pizza-creator">
-
       <h2>
         Choose your pizzas
         <button class="button" type="button" (click)="addPizza()">
@@ -16,56 +18,50 @@ import { FormArray } from '@angular/forms';
         </button>
       </h2>
 
-      <div *ngFor="let pizza of pizzas.controls; let i = index;">
+      <div *ngFor="let pizza of pizzas.controls; let i = index">
         <div class="pizza-creator__header" (click)="togglePizza(i)">
-          
-          <i 
+          <i
             class="fa fa-fw pizza-creator__icon"
             [class.fa-chevron-down]="openPizza !== i"
-            [class.fa-chevron-up]="openPizza === i"></i>
+            [class.fa-chevron-up]="openPizza === i"
+          ></i>
           Pizza {{ i + 1 }}
 
-          <i 
+          <i
             class="fa fa-fw pizza-creator__status"
             [class.fa-check]="pizza.valid"
-            [class.fa-times]="pizza.invalid"></i>
+            [class.fa-times]="pizza.invalid"
+          ></i>
 
-          <div 
+          <div
             class="pizza-creator__delete"
             *ngIf="pizzas.controls.length > 1"
-            (click)="removePizza(i)">
+            (click)="removePizza(i)"
+          >
             <i class="fa fa-trash fa-fw"></i>
           </div>
-
         </div>
 
-        <div 
+        <div
           class="pizza-creator__content"
           [class.pizza-creator__content--open]="openPizza === i"
-          [formGroup]="pizza">
-
+          [formGroup]="pizza"
+        >
           <h3>Select the size <span class="required">*</span></h3>
-          <pizza-size 
-            formControlName="size">
-          </pizza-size>
+          <pizza-size formControlName="size"> </pizza-size>
 
           <h3>Pick your toppings</h3>
-          <pizza-toppings 
-            formControlName="toppings">
-          </pizza-toppings>
-
+          <pizza-toppings formControlName="toppings"> </pizza-toppings>
         </div>
-
       </div>
     </div>
-  `
+  `,
 })
 export class PizzaCreatorComponent {
-
   private visiblePizza: number = 0;
 
   @Input()
-  pizzas: FormArray;
+  pizzas: FormArray | undefined;
 
   @Output()
   add = new EventEmitter<any>();
@@ -96,7 +92,7 @@ export class PizzaCreatorComponent {
     this.remove.emit(index);
     this.openPizza = this.pizzas.length - 1;
   }
-  
+
   togglePizza(index: number) {
     if (this.openPizza === index) {
       this.openPizza = -1;

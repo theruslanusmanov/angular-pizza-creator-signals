@@ -1,5 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { TitleCasePipe } from '@angular/common';
 
 export const PIZZA_SIZE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -11,20 +12,24 @@ export const PIZZA_SIZE_ACCESSOR = {
   selector: 'pizza-size',
   providers: [PIZZA_SIZE_ACCESSOR],
   styleUrls: ['pizza-size.component.scss'],
+  imports: [TitleCasePipe],
   template: `
     <div class="pizza-size section">
-      <label *ngFor="let size of sizes; let i = index;"
-          class="pizza-size__item"
-          [class.pizza-size__item--active]="value === size.type"
-          [class.pizza-size__item--focused]="focused === size.type">
-        <input 
+      <label
+        *ngFor="let size of sizes; let i = index"
+        class="pizza-size__item"
+        [class.pizza-size__item--active]="value === size.type"
+        [class.pizza-size__item--focused]="focused === size.type"
+      >
+        <input
           type="radio"
           name="size"
           [attr.value]="size.type"
           (blur)="onBlur(size.type)"
           (change)="onChange(size.type)"
           (focus)="onFocus(size.type)"
-          [checked]="value === size.type">
+          [checked]="value === size.type"
+        />
 
         <div class="pizza-size__plate">
           <div class="pizza-size__pizza pizza-size__pizza--{{ size.type }}">
@@ -37,20 +42,19 @@ export const PIZZA_SIZE_ACCESSOR = {
         {{ size.type | titlecase }} ({{ size.inches }}")
       </label>
     </div>
-  `
+  `,
 })
 export class PizzaSizeComponent implements ControlValueAccessor {
-  
-  private onModelChange: Function;
-  private onTouch: Function;
-  
-  value: string;
-  focused: string;
-  
+  private onModelChange: Function | undefined;
+  private onTouch: Function | undefined;
+
+  value: string | undefined;
+  focused: string | undefined;
+
   sizes: any[] = [
     { type: 'large', inches: 13 },
     { type: 'medium', inches: 11 },
-    { type: 'small', inches: 9 }
+    { type: 'small', inches: 9 },
   ];
 
   registerOnChange(fn: Function) {
@@ -67,6 +71,7 @@ export class PizzaSizeComponent implements ControlValueAccessor {
 
   onChange(value: string) {
     this.value = value;
+    // @ts-ignore
     this.onModelChange(value);
   }
 
@@ -76,6 +81,7 @@ export class PizzaSizeComponent implements ControlValueAccessor {
 
   onFocus(value: string) {
     this.focused = value;
+    // @ts-ignore
     this.onTouch();
   }
 }

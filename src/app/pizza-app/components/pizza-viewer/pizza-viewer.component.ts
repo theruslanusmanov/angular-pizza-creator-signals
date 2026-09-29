@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { transition, style, animate, trigger } from '@angular/animations';
 import { FormArray } from '@angular/forms';
+import { NgForOf } from '@angular/common';
 
 export const DROP_ANIMATION = trigger('drop', [
   transition(':enter', [
@@ -26,7 +27,7 @@ export const DROP_ANIMATION = trigger('drop', [
       <div
         class="pizza"
         [class.pizza--active]="activePizza === i"
-        *ngFor="let pizza of pizzas.controls; let i = index"
+        *ngFor="let pizza of pizzas!.controls; let i = index"
       >
         <div class="pizza__board"></div>
         <div class="pizza__base"></div>
@@ -42,6 +43,7 @@ export const DROP_ANIMATION = trigger('drop', [
       </div>
     </div>
   `,
+  imports: [NgForOf],
 })
 export class PizzaViewerComponent {
   @Input()

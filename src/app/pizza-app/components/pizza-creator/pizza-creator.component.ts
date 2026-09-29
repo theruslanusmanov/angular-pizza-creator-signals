@@ -2,13 +2,14 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 import { FormArray, ReactiveFormsModule } from '@angular/forms';
 import { PizzaSizeComponent } from '../pizza-size/pizza-size.component';
 import { PizzaToppingsComponent } from '../pizza-toppings/pizza-toppings.component';
+import { NgForOf } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'pizza-creator',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['pizza-creator.component.scss'],
-  imports: [PizzaSizeComponent, PizzaToppingsComponent, ReactiveFormsModule],
+  imports: [PizzaSizeComponent, PizzaToppingsComponent, ReactiveFormsModule, NgForOf],
   template: `
     <div class="pizza-creator">
       <h2>
@@ -19,7 +20,7 @@ import { PizzaToppingsComponent } from '../pizza-toppings/pizza-toppings.compone
         </button>
       </h2>
 
-      <div *ngFor="let pizza of pizzas.controls; let i = index">
+      <div *ngFor="let pizza of pizzas!.controls; let i = index">
         <div class="pizza-creator__header" (click)="togglePizza(i)">
           <i
             class="fa fa-fw pizza-creator__icon"

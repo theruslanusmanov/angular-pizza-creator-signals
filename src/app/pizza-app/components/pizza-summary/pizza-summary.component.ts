@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
-import { CurrencyPipe, TitleCasePipe } from '@angular/common';
+import { CurrencyPipe, NgForOf, TitleCasePipe } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -38,7 +38,7 @@ import { CurrencyPipe, TitleCasePipe } from '@angular/common';
       </button>
     </div>
   `,
-  imports: [TitleCasePipe, CurrencyPipe],
+  imports: [TitleCasePipe, CurrencyPipe, NgForOf],
 })
 export class PizzaSummaryComponent {
   @Input()

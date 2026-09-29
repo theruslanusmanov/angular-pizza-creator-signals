@@ -1,6 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TitleCasePipe } from '@angular/common';
+import { NgForOf, TitleCasePipe } from '@angular/common';
 
 export const PIZZA_SIZE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -13,7 +13,7 @@ export const PIZZA_SIZE_ACCESSOR = {
   selector: 'pizza-size',
   providers: [PIZZA_SIZE_ACCESSOR],
   styleUrls: ['pizza-size.component.scss'],
-  imports: [TitleCasePipe],
+  imports: [TitleCasePipe, NgForOf],
   template: `
     <div class="pizza-size section">
       <label

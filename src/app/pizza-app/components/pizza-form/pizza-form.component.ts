@@ -17,57 +17,34 @@ import { NgIf } from '@angular/common';
         <div class="input">
           <label>
             Name <span class="required">*</span>
-            <span
-              *ngIf="
-                parent.get('details').get('name').hasError('required') &&
-                parent.get('details').get('name').touched
-              "
-              class="error"
-            >
-              Field is required
-            </span>
+            @if (parent.get('details').get('name').hasError('required') && parent.get('details').get('name').touched) {
+              <span class="error">Field is required</span>
+            }
           </label>
           <input formControlName="name" type="text" placeholder="John Smith" />
         </div>
         <div class="input">
           <label>
             Email <span class="required">*</span>
-            <span
-              *ngIf="
-                parent.get('details').get('email').errors &&
-                parent.get('details').get('email').touched
-              "
-              class="error"
-            >
-              Field is required
-            </span>
+            @if (parent.get('details').get('email').errors && parent.get('details').get('email').touched) {
+              <span class="error">Field is required</span>
+            }
           </label>
           <input formControlName="email" type="email" placeholder="Enter your email" />
         </div>
         <div class="input">
           <label>
             Confirm <span class="required">*</span>
-            <span
-              *ngIf="
-                parent.get('details').get('confirm').errors &&
-                parent.get('details').get('confirm').touched
-              "
-              class="error"
-            >
-              <span *ngIf="parent.get('details').get('confirm').hasError('required')">
-                Field is required
+            @if (parent.get('details').get('confirm').errors && parent.get('details').get('confirm').touched) {
+              <span class="error">
+                @if (parent.get('details').get('confirm').hasError('required')) {
+                  <span>Field is required</span>
+                }
               </span>
-            </span>
-            <span
-              class="error"
-              *ngIf="
-                !parent.get('details').get('confirm').hasError('required') &&
-                parent.get('details').touched &&
-                parent.get('details').hasError('nomatch')
-              "
-            >
-              Emails must match
-            </span>
+            }
+            @if (!parent.get('details').get('confirm').hasError('required') && parent.get('details').touched && parent.get('details').hasError('nomatch')) {
+              <span class="error">Emails must match</span>
+            }
           </label>
           <input formControlName="confirm" type="email" placeholder="Confirm your email" />
         </div>
@@ -76,55 +53,40 @@ import { NgIf } from '@angular/common';
         <div class="input">
           <label>
             Address <span class="required">*</span>
-            <span
-              *ngIf="
-                parent.get('details').get('address').errors &&
-                parent.get('details').get('address').touched
-              "
-              class="error"
-            >
-              <span *ngIf="parent.get('details').get('address').hasError('required')">
-                Field is required
+            @if (parent.get('details').get('address').errors && parent.get('details').get('address').touched) {
+              <span class="error">
+                @if (parent.get('details').get('address').hasError('required')) {
+                  <span>Field is required</span>
+                }
+                @if (parent.get('details').get('address').hasError('minlength')) {
+                  <span>Min of 3 characters</span>
+                }
               </span>
-              <span *ngIf="parent.get('details').get('address').hasError('minlength')">
-                Min of 3 characters
-              </span>
-            </span>
+            }
           </label>
           <input formControlName="address" type="text" placeholder="44 Pizza Street" />
         </div>
         <div class="input">
           <label>
             Postcode <span class="required">*</span>
-            <span
-              *ngIf="
-                parent.get('details').get('postcode').errors &&
-                parent.get('details').get('postcode').touched
-              "
-              class="error"
-            >
-              <span *ngIf="parent.get('details').get('postcode').hasError('required')">
-                Field is required
-              </span>
-              <span *ngIf="parent.get('details').get('postcode').hasError('minlength')">
-                Min of 3 characters
-              </span>
-            </span>
+            @if (parent.get('details').get('postcode').errors && parent.get('details').get('postcode').touched) {
+              <span class="error"></span>
+            }
+            @if (parent.get('details').get('postcode').hasError('required')) {
+              <span> Field is required </span>
+            }
+            @if (parent.get('details').get('postcode').hasError('minlength')) {
+              <span> Min of 3 characters </span>
+            }
           </label>
           <input formControlName="postcode" type="text" placeholder="PI3 3AS" />
         </div>
         <div class="input">
           <label>
             Contact Number <span class="required">*</span>
-            <span
-              *ngIf="
-                parent.get('details').get('phone').errors &&
-                parent.get('details').get('phone').touched
-              "
-              class="error"
-            >
-              Field is required
-            </span>
+            @if (parent.get('details').get('phone').errors && parent.get('details').get('phone').touched) {
+              <span class="error"> Field is required </span>
+            }
           </label>
           <input formControlName="phone" type="text" placeholder="01234 567 890" />
         </div>

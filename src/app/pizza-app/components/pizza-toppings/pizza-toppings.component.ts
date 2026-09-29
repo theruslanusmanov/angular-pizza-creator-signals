@@ -1,5 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgForOf, TitleCasePipe } from '@angular/common';
 
 const PIZZA_TOPPINGS_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -34,6 +35,7 @@ const PIZZA_TOPPINGS_ACCESSOR = {
       </label>
     </div>
   `,
+  imports: [NgForOf, TitleCasePipe],
 })
 export class PizzaToppingsComponent implements ControlValueAccessor {
   toppings = [

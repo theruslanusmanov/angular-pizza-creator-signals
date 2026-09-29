@@ -9,6 +9,7 @@ export const PIZZA_SIZE_ACCESSOR = {
 };
 
 @Component({
+  standalone: true,
   selector: 'pizza-size',
   providers: [PIZZA_SIZE_ACCESSOR],
   styleUrls: ['pizza-size.component.scss'],

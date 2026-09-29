@@ -14,6 +14,7 @@ export const DROP_ANIMATION = trigger('drop', [
 ]);
 
 @Component({
+  standalone: true,
   selector: 'pizza-viewer',
   animations: [DROP_ANIMATION],
   styleUrls: ['pizza-viewer.component.scss'],

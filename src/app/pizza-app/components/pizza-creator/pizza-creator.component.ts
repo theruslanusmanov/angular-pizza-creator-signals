@@ -4,6 +4,7 @@ import { PizzaSizeComponent } from '../pizza-size/pizza-size.component';
 import { PizzaToppingsComponent } from '../pizza-toppings/pizza-toppings.component';
 
 @Component({
+  standalone: true,
   selector: 'pizza-creator',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['pizza-creator.component.scss'],
@@ -85,12 +86,12 @@ export class PizzaCreatorComponent {
 
   addPizza() {
     this.add.emit();
-    this.openPizza = this.pizzas.length - 1;
+    this.openPizza = this.pizzas!.length - 1;
   }
 
   removePizza(index: number) {
     this.remove.emit(index);
-    this.openPizza = this.pizzas.length - 1;
+    this.openPizza = this.pizzas!.length - 1;
   }
 
   togglePizza(index: number) {

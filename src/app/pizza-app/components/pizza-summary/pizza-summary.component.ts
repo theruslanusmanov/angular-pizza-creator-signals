@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'pizza-summary',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['pizza-summary.component.scss'],

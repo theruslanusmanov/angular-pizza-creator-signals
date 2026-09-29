@@ -8,6 +8,7 @@ const PIZZA_TOPPINGS_ACCESSOR = {
 };
 
 @Component({
+  standalone: true,
   selector: 'pizza-toppings',
   providers: [PIZZA_TOPPINGS_ACCESSOR],
   styleUrls: ['pizza-toppings.component.scss'],

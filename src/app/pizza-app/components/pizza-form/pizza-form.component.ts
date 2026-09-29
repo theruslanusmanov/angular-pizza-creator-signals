@@ -1,13 +1,15 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PizzaCreatorComponent } from '../pizza-creator/pizza-creator.component';
 import { PizzaSummaryComponent } from '../pizza-summary/pizza-summary.component';
+import { NgIf } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'pizza-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['pizza-form.component.scss'],
-  imports: [PizzaCreatorComponent, PizzaSummaryComponent],
+  imports: [PizzaCreatorComponent, PizzaSummaryComponent, ReactiveFormsModule, NgIf],
   template: `
     <form (ngSubmit)="onSubmit($event)" [formGroup]="parent">
       <h2>Enter your details</h2>
@@ -129,23 +131,23 @@ import { PizzaSummaryComponent } from '../pizza-summary/pizza-summary.component'
       </div>
 
       <pizza-creator
-        [pizzas]="parent.get('pizzas')"
+        [pizzas]="parent?.controls?.pizzas"
         (add)="onAddPizza($event)"
         (remove)="onRemovePizza($event)"
         (toggle)="onToggle($event)"
       >
       </pizza-creator>
 
-      <pizza-summary [parent]="parent" [prices]="prices" [total]="total"> </pizza-summary>
+      <pizza-summary [parent]="parent" [prices]="prices" [total]="total"></pizza-summary>
     </form>
   `,
 })
 export class PizzaFormComponent {
   @Input()
-  parent: FormGroup;
+  parent: FormGroup<{ details: FormGroup; pizzas: FormArray }> | undefined;
 
   @Input()
-  total: string;
+  total: string | undefined;
 
   @Input()
   prices: any;
